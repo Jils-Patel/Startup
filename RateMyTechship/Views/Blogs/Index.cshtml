@@ -1,0 +1,92 @@
+﻿@model IEnumerable<RateMyTechship.Models.Blog>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@* <p>
+    <a asp-action="Create">Create New</a>
+</p> *@
+
+<div class="card" style="border-radius: 10px; background-color: #f8f9fa; color: #212529; font-size: 22px; font-family: 'Roboto', sans-serif;">
+    <div class="card-body">
+        <p class="card-text">
+            Interested in writing about your internship experience? 
+            <a href="mailto:jilspatel02@gmail.com">
+                <button style="color: orange; text-decoration: underline; border: none; background: none;">Contact Us!</button>
+            </a>
+        </p>
+    </div>
+</div>
+
+
+
+<table class="table">
+    @* <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th></th>
+        </tr>
+    </thead> *@
+    <tbody>
+        <div class="row" style="margin-top: 10px; margin-bottom: 50px;">
+            <div class="col-md-12">
+                @foreach (var item in Model.Reverse())
+                {
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn" style="border: none; outline: none;">
+                        <div class="card" style="width: 400px; height: 180px; border-radius: 10px; overflow: hidden;">
+                            <img src="image/@item.BackgroundImage" @* src="@item.Author" *@ class="card-img" style="width: 100%; height: auto; object-fit: cover;" alt="Background Image">
+                            <div style="font-weight: bold; font-family: 'Roboto', sans-serif; position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; padding: 20px; background-color: rgba(0, 0, 0, 0.5); color: white; text-align: left; box-sizing: border-box;">
+                                <h2 class="card-title" style="font-size: 24px; margin-top: 70px; font-weight: bold;">@item.Title</h2>
+                                <h6 class="card-subtitle mb-2" style="font-size: 17px; font-weight: bold;">By @item.Author</h6>
+                                <p class="card-text" style="font-size: 14px;">@item.Date</p>
+                            </div>
+                        </div>
+                          @* <div class="card-footer">
+                    <div class="btn-group">
+                     <button type="button" class="btn btn-sm btn-outline-success thumbs-up" style="padding: 10px 20px; font-size: 18px;">
+                    &#x1F44D;
+                    <span class="badge bg-success">0</span>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger thumbs-down" style="padding: 10px 20px; font-size: 18px;">
+                    &#x1F44E;
+                    <span class="badge bg-danger">0</span>
+                    </button> 
+                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-secondary" style="background-color: orange; color: black;">View Details</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                            </div> 
+                         </div>  *@
+                    </a>
+                }
+            </div>
+           @*  <div class="card-footer">
+                <div class="btn-group">
+                    @* <button type="button" class="btn btn-sm btn-outline-success thumbs-up" style="padding: 10px 20px; font-size: 18px;">
+                    &#x1F44D;
+                    <span class="badge bg-success">0</span>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger thumbs-down" style="padding: 10px 20px; font-size: 18px;">
+                    &#x1F44E;
+                    <span class="badge bg-danger">0</span>
+                    </button> *@
+                    @* <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-primary">Edit</a> *@
+                    @*<a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-secondary" style="background-color: orange; color: black;">View Details</a> *@
+                    @* <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger">Delete</a> *@
+                @* </div> *@
+            @* </div> *@
+        </div>
+
+    </tbody>
+</table>

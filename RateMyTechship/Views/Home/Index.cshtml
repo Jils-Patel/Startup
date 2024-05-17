@@ -1,0 +1,148 @@
+﻿@model IEnumerable<RateMyTechship.Models.Review>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .shade2 {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/image/office.jpeg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        color: white;
+        /* Set height to 100vh for full viewport height */
+        height: 70vh;
+    }
+
+    .body-container {
+        /*remove the container default padding attribute*/
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        /*increase width as per your need*/
+        max-width: 100%;
+        /* Set max-height to 100% to allow the container to expand with its content */
+        max-height: 100%;
+    }
+</style>
+
+
+
+<div class="full-width shade2">
+    <div class="text-center body-container">
+        <h1 class="display-4" style="margin-bottom: 30px; font-weight: bold;">Your Ultimate Destination For Internship Experiences!</h1>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form asp-action="ShowSearchResults" asp-controller="Reviews">
+                        <div class="form-group mb-0">
+                            <label for="SearchPhrase" class="control-label"></label>
+                            <input name="SearchPhrase" class="form-control" style="height: 50px;" placeholder="Search for a company or position here" />
+                            <p class="mb-0"><a asp-controller="Reviews" asp-action="Index" style="color: white; text-decoration: none;">View All Reviews</a></p>
+                        </div>
+                        <div class="form-group mb-0">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <input style="font-size: 22px; background-color: orange; color: black; font-weight: bold; border: black;" type="submit" value="Search" class="btn btn-primary" />
+                                <div></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@* <div class="text-center">
+        <div class="text-center" style="margin-top: 50px; font-size: 25px;">
+            <h2>About Us</h2>
+        </div>
+</div> *@
+
+@* <div class="container" style="margin-top: 15px; margin-bottom: 15px;">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <p style="font-family: 'Roboto', sans-serif; font-size: 22px;">
+                We are RateMyTechShip, your go-to platform for tech internship reviews! Our mission is to empower students in their internship journey by providing a platform where they can share their experiences and insights.
+            </p>
+        </div>
+        <div class="col-md-4 text-center">
+            <img src="image/team.jpg" class="img-fluid" alt="Image Description" style="width: 100%; max-width: 100%; height: auto; border-radius: 10px;">
+        </div>
+        <div class="col-md-4 text-center">
+            <p style="font-family: 'Roboto', sans-serif; font-size: 22px;">
+                Whether you're a student looking for internship opportunities or a company seeking feedback, we've got you covered. 
+            </p>
+        </div>
+    </div>
+</div> *@
+
+
+<div class="container" style="margin-top: 20px; width: 80%;">
+    <div class="row">
+        <div class="col-md-6 order-md-3 order-4 text-center" style="margin-top: 60px;">
+            <img src="image/robot.jpeg" class="img-fluid" alt="Image Description" style="width: 500px; height: 500px; border-radius: 10px;">
+        </div>
+        <div id="about-us" class="col-md-6 order-md-4 order-3 text-center" style="margin-top: 100px;">
+            <h2 style="font-family: 'Roboto', sans-serif; color: orange; font-weight: bold;">About Us</h2>
+            <p style="width: 80%; font-size: 20px; margin: 0 auto; margin-top: 20px; font-family: 'Roboto', sans-serif;">
+                Welcome to RateMyTechShip, where the tech community thrives on honest feedback. Our platform connects interns and students, providing a space to share, discover, and evaluate internship experiences. Empowering the future of tech talent, we facilitate invaluable insights to shape career paths and foster growth. Join us in revolutionizing the internship landscape, one review at a time.
+                <a asp-controller="Reviews" asp-action="Index" style="color: orange;">Click here</a> to get started!
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 order-md-1 order-1 text-center" style="margin-top: 140px;">
+            <h2 style="font-family: 'Roboto', sans-serif; color: orange; font-weight: bold;">Write Reviews</h2>
+            <p style="font-family: 'Roboto', sans-serif; font-size: 25px; width: 80%; margin: 0 auto; margin-top: 20px;">Share your internship experiences anonymously and provide feedback to help others!  <a asp-controller="Reviews" asp-action="Create" style="color:orange;">Write a review</a> today!</p>
+        </div>
+        <div class="col-md-6 order-md-2 order-2 text-center" style="margin-top: 60px;">
+            <img src="image/rev2.jpeg" class="img-fluid" alt="Image Description" style="width: 500px; height: 500px; border-radius: 10px;">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 order-md-3 order-4 text-center" style="margin-top: 60px;">
+            <img src="image/search8.jpeg" class="img-fluid" alt="Image Description" style="width: 500px; height: 500px; border-radius: 10px;">
+        </div>
+        <div class="col-md-6 order-md-4 order-3 text-center" style="margin-top: 140px;">
+            <h2 style="font-family: 'Roboto', sans-serif; color: orange; font-weight: bold;">Search and Explore</h2>
+            <p style="font-size: 25px; width: 80%; margin: 0 auto; margin-top: 20px; font-family: 'Roboto', sans-serif;">
+                Browse through various reviews from other interns and explore to find the best fit for you!
+                <a asp-controller="Reviews" asp-action="Index" style="color: orange;">Search now</a> to get started!
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 order-md-1 order-1 text-center" style="margin-top: 140px;">
+            <h2 style="font-family: 'Roboto', sans-serif; color: orange; font-weight: bold;">Blog</h2>
+            <p style="font-family: 'Roboto', sans-serif; font-size: 25px; width: 80%; margin: 0 auto; margin-top: 20px;">Interested in sharing your unique internship experiences or delving into the stories shared by others? 
+                Check out our <a asp-controller="Blogs" asp-action="Index" style="color: orange;">blog page</a>!
+            </p>
+        </div>
+        <div class="col-md-6 order-md-2 order-2 text-center" style="margin-top: 60px;">
+            <img src="image/blog2.jpeg" class="img-fluid" alt="Image Description" style="width: 500px; height: 500px; border-radius: 10px;">
+        </div>
+    </div>
+</div>
+
+
+<div id="contact" class="contact-section text-center" style="margin-bottom: 100px;">
+    <h2 class="text-center" style="margin-top: 30px; color: orange; font-weight: bold;">Contact Us</h2>
+    <p style="font-family: 'Roboto', sans-serif; font-size: 20px; width: 50%; margin: 0 auto; margin-top: 20px;">
+        Have any questions, comments, or feedback? Please let us know by clicking the button below and sending us an email. Our team will be more than happy to assist.</p>
+    <a href="mailto:jilspatel02@gmail.com">
+        <button style="margin-top: 10px; background-color: orange; color: black; font-size: 20px; font-family: 'Roboto', sans-serif; border-radius: 10px;">Contact Us</button>
+    </a>
+</div>
+
+
+
+
+
+
+

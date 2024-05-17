@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RateMyTechship</title>
+    <link rel="icon" type="image/x-icon" href="/image/Tech.ico" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/RateMyTechship.styles.css" asp-append-version="true" />
+</head>
+<body>
+    @* <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white" style="height: 75px;">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 30px;">
+                    <span style="color: black; font-weight: bold;">RateMy</span><span style="color: orange; font-weight: bold;">Techship</span>
+                </a>
+                <a class="btn btn-outline-primary" asp-area="" asp-controller="Home" asp-action="Index" style="color: black; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px;">Home</a>
+                <a class="btn btn-outline-primary" href="/Home#about-us" style="color: black; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px;">About</a>
+                <a class="btn btn-outline-primary" href="/Home#contact" style="color: black; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px;">Contact</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header> *@
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white" style="min-height: 75px;">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <div>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 30px;">
+                        <span style="color: black; font-weight: bold;">RateMy</span><span style="color: orange; font-weight: bold;">Techship</span>
+                    </a>
+                </div>
+                <div>
+                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Home" asp-action="Index" style="color: #777; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px; border: none;">Home</a>
+                    <a class="btn btn-outline-primary" href="/Home#about-us" style="color: #777; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px; border: none;">About</a>
+                    <a class="btn btn-outline-primary" href="/Home#contact" style="color: #777; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px; border: none;">Contact</a>
+                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Blogs" asp-action="Index" style="color: #777; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px; border: none;">Blog</a>
+                </div>
+                <div>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <style>
+        /* CSS for button hover effect */
+        .btn-outline-primary:hover {
+            color: orange !important;
+            background-color: transparent !important;
+        }
+    </style>
+
+
+    <div class="container body-container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted text-center" style="background-color: orange; color: black;">
+        <div class="container" style="color: black">
+            &copy; 2024 - RateMyTechship - All Rights Reserved - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> - <a asp-area="" asp-controller="Home" asp-action="TermsOfUse">Terms of Use</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿@model RateMyTechship.Models.Blog
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="blog-post-container" style="margin-bottom: 80px;">
+    <div class="blog-post">
+        <h2 class="blog-post-title">@Html.DisplayFor(model => model.Title)</h2>
+        <p style="font-size: 14px; margin: 0;"><strong>By @Html.DisplayFor(model => model.Author)</strong></p>
+        <p style="font-size: 14px; margin: 0;"><strong style="color: gray;">@Html.DisplayFor(model => model.Major)</strong></p>
+        <p style="font-size: 14px; margin: 0 margin-bottom: 10px;"><strong style="color: gray;">@Html.DisplayFor(model => model.Date)</strong></p>
+
+        <!-- Blog post content -->
+        <div class="blog-post-content">
+            @Html.Raw(Model.Content.Replace("<p>&nbsp;</p>", ""))
+        </div>
+    </div>
+</div>
+
+<style>
+    .blog-post-container {
+        max-width: 580px; /* Adjust this value to your preference */
+        margin: 0 auto; /* Center the container horizontally */
+        font-family: 'Roboto', sans-serif;
+    }
+
+</style>
+
+
+
+@* <p> *@
+    @* <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a> *@
+    @* <a asp-action="Index" class="btn btn-secondary" style="margin-bottom: 40px;">Back to List</a> *@
+@* </p> *@
+
+

@@ -1,0 +1,35 @@
+﻿@model RateMyTechship.Models.Review
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Company Name:</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.CompanyName)</dd>
+
+            <dt class="col-sm-3">Date Posted:</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.CreationDate)</dd>
+
+            <dt class="col-sm-3">Internship Period:</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Duration)</dd>
+
+            <dt class="col-sm-3">Position:</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Position)</dd>
+
+            <dt class="col-sm-3">Rating (1 - 5):</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Rating)</dd>
+
+            <dt class="col-sm-3">Internship Review:</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.InternshipReview)</dd>
+        </dl>
+    </div>
+</div>
+
+<div style="margin-top: 20px;">
+    <a asp-action="Index" style="font-family: 'Roboto', sans-serif; text-decoration: none; color: black; background-color: orange; border-radius: 7px; font-size: 20px; padding: 6px 6px;">Back to List</a>
+</div>
