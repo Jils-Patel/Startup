@@ -26,6 +26,12 @@ namespace RateMyTechship.Models
         public string Workload { get; set; }
         [DisplayName("Review")]
         public string InternshipReview { get; set; }
+        public int Likes { get; set; }
+        public int Dislike { get; set; }
+        public bool HasLiked { get; set; }
+        public bool HasDisliked { get; set; }
+        public List<string> LikedByUserIds { get; set; } = new List<string>();
+        public List<string> DislikedByUserIds { get; set; } = new List<string>();
         public Review()
         {
 

@@ -12,5 +12,11 @@ namespace RateMyTechship.Data
         }
         public DbSet<RateMyTechship.Models.Review> Review { get; set; } = default!;
         public DbSet<RateMyTechship.Models.Blog> Blog { get; set; } = default!;
+        public DbSet<AppUser> AppUsers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
     }
 }

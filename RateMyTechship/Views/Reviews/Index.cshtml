@@ -4,6 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+@inject IHttpContextAccessor HttpContextAccessor
+
 <h1>Search For Reviews Or Write Your Own!</h1>
 
 <div class="row">
@@ -40,10 +44,10 @@
                     <div class="card-body"> @* style="height: 370px; overflow-y: auto;"> *@
                         <div class="row">
                             <div class="col-12 col-md-1">
-                                <p class="card-text" style="margin-top: 20px;">
-                                    <strong style="font-size: 22px; font-weight: bold;">Rating</strong>
+                                <p class="card-text" style="margin-top: 24px;">
+                                    <strong style="font-size: 19px; font-weight: bold;">Rating</strong>
                                 </p>
-                                <p class="card-text" style="font-size: 22px; font-weight: bold; margin-top: -10px;">
+                                <p class="card-text" style="font-size: 20px; font-weight: bold; margin-top: -10px;">
                                     <span class="rating" style="background-color: @(item.Rating <= 2 ? "#FF9999" : item.Rating <= 3 ? "#FFFF99" : "#99FF99"); display: inline-block; padding: 4px 8px; border-radius: 4px;">@Html.DisplayFor(modelItem => item.Rating) / 5</span>
                                 </p>
                             </div>
@@ -77,28 +81,183 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
+                    @* <div class="card-footer">
                         <div class="btn-group">
-                            @* <button type="button" class="btn btn-sm btn-outline-success thumbs-up" style="padding: 10px 20px; font-size: 18px;">
+                             <button type="button" class="btn btn-sm btn-outline-success thumbs-up" style="padding: 10px 20px; font-size: 18px;">
                                 &#x1F44D;
                                 <span class="badge bg-success">0</span>
                             </button>
                             <button type="button" class="btn btn-sm btn-outline-danger thumbs-down" style="padding: 10px 20px; font-size: 18px;">
                                 &#x1F44E;
                                 <span class="badge bg-danger">0</span>
-                            </button> *@
+                            </button> 
                             @* <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-primary">Edit</a> *@
                             @*<a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-secondary" style="background-color: orange; color: black;">View Details</a> *@
                             @* <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger">Delete</a> *@
-                        </div>
+                        @* </div> *@
+                    @* </div> *@
+                    <div class="card-footer d-flex justify-content-end align-items-center">
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm custom-edit-button">View Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm custom-edit-button">Delete</a>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm custom-edit-button">Edit</a>
+                        }
+                        <button class="btn btn-sm btn-outline-success" onclick="likeReview(@item.ID)" id="likeButton_@item.ID" style="outline: none; border: none; font-size: 20px;">
+                            <i class="fas fa-thumbs-up" id="likeIcon_@item.ID" style="font-size: 20px; color: black; outline: black; border: black"></i>
+                        </button>
+                        <span id="likeCount_@item.ID" style="margin-left: 5px; margin-right: 15px;">@item.Likes</span>
+                        <button class="btn btn-sm btn-outline-danger" onclick="dislikeReview(@item.ID)" id="dislikeButton_@item.ID" style="outline: none; border: none; font-size: 20px;">
+                            <i class="fas fa-thumbs-down" id="dislikeIcon_@item.ID" style="font-size: 20px;  color: black; outline: black; border: black"></i>
+                        </button>
+                        <span id="dislikeCount_@item.ID" style="margin-left: 5px;">@item.Dislike</span>
                     </div>
+                    @* <div class="card-footer d-flex justify-content-end align-items-center">
+                        <button class="btn btn-sm btn-outline-success" onclick="likeReview(@item.ID)" style="outline: none; border: none; font-size: 20px;">
+                            <i class="fas fa-thumbs-up" style="outline: none; border: none; font-size: 20px; color: black; outline: black; border: black;"></i>
+                        </button>
+                        <span id="likeCount_@item.ID" style="margin-left: 5px; margin-right: 15px;">@item.Likes</span>
+                        <button class="btn btn-sm btn-outline-danger" onclick="dislikeReview(@item.ID)" style="outline: none; border: none; font-size: 20px;">
+                            <i class="fas fa-thumbs-down" style="outline: none; border: none; font-size: 20px; color: black; outline: black; border: black;"></i>
+                        </button>
+                        <span id="dislikeCount_@item.ID" style="margin-left: 5px;">@item.Dislike</span>
+                    </div> *@
                 </div>
             </div>
         </div>
     }
 </div>
 
+<style>
+.custom-edit-button {
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 2px solid black; /* Black border */
+    text-decoration: none; /* Removes the underline */
+    display: inline-block; /* Ensures the button behaves like a button */
+    margin-right: 15px;
+}
+
+.custom-edit-button:hover {
+    background-color: black; /* Change background color on hover */
+    color: white; /* Change text color on hover */
+}
+</style>
+
+
+<script>
+    var isAuthenticated = '@User.Identity.IsAuthenticated'.toLowerCase() === 'true';
+
+    function likeReview(reviewId) {
+        if (!isAuthenticated) {
+            window.location.href = '/Identity/Account/Login'; // Redirect to login page
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            data: { reviewId: reviewId },
+            url: '/Reviews/Like',
+            success: function (response) {
+                $('#likeCount_' + reviewId).text(response.likesCount);
+                $('#dislikeCount_' + reviewId).text(response.dislikesCount);
+
+                // Update button styles based on current state
+                if (response.likedByCurrentUser) {
+                    $('#likeIcon_' + reviewId).css('color', 'green');
+                    $('#dislikeIcon_' + reviewId).css('color', 'black');
+                } else {
+                    $('#likeIcon_' + reviewId).css('color', 'black');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+    function dislikeReview(reviewId) {
+        if (!isAuthenticated) {
+            window.location.href = '/Identity/Account/Login'; // Redirect to login page
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            data: { reviewId: reviewId },
+            url: '/Reviews/Dislike',
+            success: function (response) {
+                $('#likeCount_' + reviewId).text(response.likesCount);
+                $('#dislikeCount_' + reviewId).text(response.dislikesCount);
+
+                // Update button styles based on current state
+                if (response.dislikedByCurrentUser) {
+                    $('#dislikeIcon_' + reviewId).css('color', 'red');
+                    $('#likeIcon_' + reviewId).css('color', 'black');
+                } else {
+                    $('#dislikeIcon_' + reviewId).css('color', 'black');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+</script>
+
 @* <script>
+    var isAuthenticated = '@User.Identity.IsAuthenticated'.toLowerCase() === 'true';
+</script>
+
+
+<script>
+    function likeReview(reviewId) {
+        if (!isAuthenticated) {
+            window.location.href = '/Identity/Account/Login'; // Redirect to login page
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            data: { reviewId: reviewId },
+            url: '/Reviews/Like',
+            success: function (response) {
+                $('#likeCount_' + reviewId).text(response.likesCount);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+    function dislikeReview(reviewId) {
+        if (!isAuthenticated) {
+            window.location.href = '/Identity/Account/Login'; // Redirect to login page
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            data: { reviewId: reviewId },
+            url: '/Reviews/Dislike',
+            success: function (response) {
+                $('#dislikeCount_' + reviewId).text(response.dislikesCount);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+</script> *@
+
+
+@*  <script>
     document.addEventListener('DOMContentLoaded', function () {
         const thumbsUpButtons = document.querySelectorAll('.thumbs-up');
         const thumbsDownButtons = document.querySelectorAll('.thumbs-down');
@@ -116,8 +275,45 @@
                 countSpan.textContent = parseInt(countSpan.textContent) + 1;
             });
         });
-    });
+    })
 </script> *@
+
+@* @section scripts {
+    <script>
+        function likeReview(reviewId) {
+            $.ajax({
+                url: '/Review/Like',
+                type: 'POST',
+                data: { reviewId: reviewId },
+                success: function (response) {
+                    $('#likeCount_' + reviewId).text(response.likesCount);
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function dislikeReview(reviewId) {
+            $.ajax({
+                url: '/Review/Dislike',
+                type: 'POST',
+                data: { reviewId: reviewId },
+                success: function (response) {
+                    $('#dislikeCount_' + reviewId).text(response.dislikesCount);
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+    </script>
+} *@
+
+
+
+
+
 
 
 

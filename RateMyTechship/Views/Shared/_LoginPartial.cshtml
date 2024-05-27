@@ -1,24 +1,51 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+<style>
+    .dropdown-item:hover {
+        background-color: orange !important;
+        color: white !important;
+    }
+
+    .btn.dropdown-item:hover {
+        background-color: orange !important;
+        color: white !important;
+    }
+</style>
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-}
-else
-{
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item dropdown">
+            @{
+                var currentuser = await UserManager.GetUserAsync(User);
+            }
+            <a class="nav-link dropdown-toggle text-dark" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black; font-weight: bold; background-color: orange; border-radius: 7px; font-size: 18px; padding: 10px;">
+                Hello @currentuser.UserName!
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                @* <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Profile</a> *@
+@*                 <div class="dropdown-divider"></div>*@                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="btn btn-link dropdown-item text-dark">Logout</button>
+                </form>
+            </div>
+        </li>
+    }
+    else
+    {
         <li class="nav-item">
             <a style="background-color: orange; color: white; border-radius: 10px; font-size: 20px; font-weight: bold; padding: 5px 15px;" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Sign In</a>
         </li>
-
-}
+    }
 </ul>
+
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+

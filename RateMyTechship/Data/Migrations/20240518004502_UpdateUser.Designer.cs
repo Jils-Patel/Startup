@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RateMyTechship.Data;
 
@@ -11,9 +12,11 @@ using RateMyTechship.Data;
 namespace RateMyTechship.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240518004502_UpdateUser")]
+    partial class UpdateUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,22 +288,9 @@ namespace RateMyTechship.Data.Migrations
                     b.Property<string>("CreationDate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Dislike")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DislikedByUserIds")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Duration")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("HasDisliked")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasLiked")
-                        .HasColumnType("bit");
 
                     b.Property<string>("InternshipReview")
                         .IsRequired()
@@ -309,13 +299,6 @@ namespace RateMyTechship.Data.Migrations
                     b.Property<string>("LearningOpportunities")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LikedByUserIds")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Likes")
-                        .HasColumnType("int");
 
                     b.Property<string>("NetworkingOpportunities")
                         .IsRequired()

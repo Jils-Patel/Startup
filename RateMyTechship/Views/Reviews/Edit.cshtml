@@ -4,46 +4,132 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Review</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID" />
-            <div class="form-group">
-                <label asp-for="CompanyName" class="control-label"></label>
-                <input asp-for="CompanyName" class="form-control" />
-                <span asp-validation-for="CompanyName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Duration" class="control-label"></label>
-                <input asp-for="Duration" class="form-control" />
-                <span asp-validation-for="Duration" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Position" class="control-label"></label>
-                <input asp-for="Position" class="form-control" />
-                <span asp-validation-for="Position" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Rating" class="control-label"></label>
-                <input asp-for="Rating" class="form-control" />
-                <span asp-validation-for="Rating" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InternshipReview" class="control-label"></label>
-                <input asp-for="InternshipReview" class="form-control" />
-                <span asp-validation-for="InternshipReview" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="col-md-6 offset-md-3">
+        <div class="form-container">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ID" />
+
+                <h1>Edit Review</h1>
+
+                <div class="form-group" style="margin-top: 10px;">
+                    <label asp-for="CompanyName" class="control-label" style="font-weight: bold;"></label>
+                    <input asp-for="CompanyName" class="form-control" placeholder="e.g. Microsoft" />
+                    <span asp-validation-for="CompanyName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="margin-top: 10px;">
+                    <label asp-for="Duration" class="control-label" style="font-weight: bold;"></label>
+                    <input asp-for="Duration" class="form-control" placeholder="e.g. Summer 2024" />
+                    <span asp-validation-for="Duration" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="margin-top: 10px;">
+                    <label asp-for="Position" class="control-label" style="font-weight: bold;"></label>
+                    <input asp-for="Position" class="form-control" placeholder="e.g. Software Engineer Intern" />
+                    <span asp-validation-for="Position" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="margin-top: 10px;">
+                    <label asp-for="Rating" class="control-label" style="font-weight: bold;"></label>
+                    <input asp-for="Rating" class="form-control" placeholder="e.g. 5" max="5" />
+                    <span asp-validation-for="Rating" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="margin-top: 10px;">
+                    <label asp-for="WorkCulture" class="control-label" style="font-weight: bold;"></label>
+                    <div>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="WorkCulture" value="Excellent"> Excellent
+                        </label>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="WorkCulture" value="Good"> Good
+                        </label>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="WorkCulture" value="Average"> Average
+                        </label>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="WorkCulture" value="Needs Improvement"> Needs Improvement
+                        </label>
+                    </div>
+                    <span asp-validation-for="WorkCulture" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="margin-top: 10px;">
+                    <label asp-for="Workload" class="control-label" style="font-weight: bold;"></label>
+                    <div>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="Workload" value="Excellent"> Excellent
+                        </label>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="Workload" value="Good"> Good
+                        </label>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="Workload" value="Average"> Average
+                        </label>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="Workload" value="Needs Improvement"> Needs Improvement
+                        </label>
+                    </div>
+                    <span asp-validation-for="Workload" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="margin-top: 10px;">
+                    <label asp-for="LearningOpportunities" class="control-label" style="font-weight: bold;"></label>
+                    <div>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="LearningOpportunities" value="Excellent"> Excellent
+                        </label>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="LearningOpportunities" value="Good"> Good
+                        </label>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="LearningOpportunities" value="Average"> Average
+                        </label>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="LearningOpportunities" value="Needs Improvement"> Needs Improvement
+                        </label>
+                    </div>
+                    <span asp-validation-for="LearningOpportunities" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="margin-top: 10px;">
+                    <label asp-for="NetworkingOpportunities" class="control-label" style="font-weight: bold;"></label>
+                    <div>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="NetworkingOpportunities" value="Excellent"> Excellent
+                        </label>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="NetworkingOpportunities" value="Good"> Good
+                        </label>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="NetworkingOpportunities" value="Average"> Average
+                        </label>
+                        <label class="radio-inline" style="margin-right: 25px;">
+                            <input type="radio" asp-for="NetworkingOpportunities" value="Needs Improvement"> Needs Improvement
+                        </label>
+                    </div>
+                    <span asp-validation-for="NetworkingOpportunities" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="margin-top: 10px;">
+                    <label asp-for="InternshipReview" class="control-label" style="font-weight: bold;"></label>
+                    <textarea asp-for="InternshipReview" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="InternshipReview" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="margin-top: 20px;">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+
+                <div style="margin-top: 20px; margin-bottom: 80px;">
+                    <a asp-action="Index" style="text-decoration: none; color: black; background-color: orange; border-radius: 7px; font-size: 17px; padding: 7px 7px;">Back to List</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>

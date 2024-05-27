@@ -1,15 +1,38 @@
-﻿@inject SignInManager<IdentityUser> SignInManager
+﻿@using RateMyTechship.Models
+@inject SignInManager<AppUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
+
+<style>
+    .orange-bg {
+        color: black !important;
+        font-weight: bold !important;
+        background-color: orange !important;
+    }
+</style>
+
 <ul class="nav nav-pills flex-column">
-    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
+    <li class="nav-item">
+        <a class="nav-link @(ManageNavPages.IndexNavClass(ViewContext) == "active" ? "orange-bg" : "")" id="profile" asp-page="./Index" style="color: black;">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @(ManageNavPages.EmailNavClass(ViewContext) == "active" ? "orange-bg" : "")" id="email" asp-page="./Email" style="color: black;">Email</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @(ManageNavPages.ChangePasswordNavClass(ViewContext) == "active" ? "orange-bg" : "")" id="change-password" asp-page="./ChangePassword" style="color: black;">Password</a>
+    </li>
     @if (hasExternalLogins)
     {
-        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
+        <li id="external-logins" class="nav-item">
+            <a id="external-login" class="nav-link @(ManageNavPages.ExternalLoginsNavClass(ViewContext) == "active" ? "orange-bg" : "")" asp-page="./ExternalLogins">External logins</a>
+        </li>
     }
-    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
-    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
+    <!-- Add similar Razor code for other links if needed -->
 </ul>
+
+
+
+@* <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
+<li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li> *@
+
