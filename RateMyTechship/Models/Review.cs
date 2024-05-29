@@ -32,6 +32,7 @@ namespace RateMyTechship.Models
         public bool HasDisliked { get; set; }
         public List<string> LikedByUserIds { get; set; } = new List<string>();
         public List<string> DislikedByUserIds { get; set; } = new List<string>();
+        public string? AuthorId { get; set; }
         public Review()
         {
 

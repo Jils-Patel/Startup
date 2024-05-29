@@ -1,4 +1,9 @@
-﻿@model IEnumerable<RateMyTechship.Models.Review>
+﻿@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<AppUser> UserManager
+@inject SignInManager<AppUser> SignInManager
+
+@model IEnumerable<RateMyTechship.Models.Review>
 
 @{
     ViewData["Title"] = "Index";
@@ -102,10 +107,17 @@
                             <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm custom-edit-button">View Details</a>
                             <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm custom-edit-button">Delete</a>
                         }
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.IsInRole("Admin") || (User.Identity.IsAuthenticated && item.AuthorId == User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                        {
+                            <div class="form-group" style="margin-top: 20px;">
+                                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm custom-edit-button">Edit</a>
+                            </div>
+                        }
+
+                        @* @if (User.Identity.IsAuthenticated)
                         {
                             <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm custom-edit-button">Edit</a>
-                        }
+                        } *@
                         <button class="btn btn-sm btn-outline-success" onclick="likeReview(@item.ID)" id="likeButton_@item.ID" style="outline: none; border: none; font-size: 20px;">
                             <i class="fas fa-thumbs-up" id="likeIcon_@item.ID" style="font-size: 20px; color: black; outline: black; border: black"></i>
                         </button>

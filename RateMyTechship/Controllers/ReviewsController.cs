@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -17,10 +18,12 @@ namespace RateMyTechship.Controllers
     public class ReviewsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ReviewsController(ApplicationDbContext context)
+        public ReviewsController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Reviews
@@ -168,11 +171,15 @@ namespace RateMyTechship.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,CreationDate,CompanyName,Duration,Position,Rating,InternshipReview,WorkCulture,LearningOpportunities,NetworkingOpportunities,Workload")] Review review)
+        public async Task<IActionResult> Create([Bind("ID,CreationDate,CompanyName,Duration,Position,Rating,InternshipReview,WorkCulture,LearningOpportunities,NetworkingOpportunities,Workload,AuthorId")] Review review)
         {
             if (ModelState.IsValid)
             {
                 review.CreationDate = DateTime.Now.ToString("MMMM dd, yyyy");
+                if (User.Identity.IsAuthenticated)
+                {
+                    review.AuthorId = _userManager.GetUserId(User);
+                }
                 _context.Add(review);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -193,6 +200,12 @@ namespace RateMyTechship.Controllers
             {
                 return NotFound();
             }
+
+            if (review.AuthorId != _userManager.GetUserId(User))
+            {
+                return Forbid(); // Or handle unauthorized access as needed
+            }
+
             return View(review);
         }
 

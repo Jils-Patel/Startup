@@ -43,7 +43,57 @@
         </tr>
     </thead> *@
     <tbody>
-        <div class="row" style="margin-top: 10px; margin-bottom: 50px;">
+        <div class="container" style="margin-top: 10px; margin-bottom: 50px;">
+            <div class="row">
+                <div class="col-md-6 order-md-2" style="margin-bottom: 10px;">
+                    <div class="position-sticky" style="top: 10px;">
+                        <div class="card text-center" style="max-width: 80%; margin: 0 auto; border-radius: 10px; padding: 20px;">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="image/orange.png" alt="Orange Image" style="width: 90%; height: auto; border-radius: 10px;">
+                                <p class="card-text" style="font-family: 'Roboto', sans-serif; font-size: 18px; margin-top: 20px;">Welcome to our Blog! We're glad to have you here! Explore the latest insights, tips, and experiences from fellow interns!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 order-md-1">
+                    @foreach (var item in Model.Reverse())
+                    {
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn" style="border: none; outline: none; padding: 0;">
+                                    <div class="card" style="width: 500px; height: 180px; border-radius: 10px; overflow: hidden;">
+                                        <img src="image/@item.BackgroundImage" class="card-img" style="width: 100%; height: 180px; object-fit: cover;" alt="Background Image">
+                                        <div style="font-weight: bold; font-family: 'Roboto', sans-serif; position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; padding: 20px; background-color: rgba(0, 0, 0, 0.5); color: white; text-align: left; box-sizing: border-box;">
+                                            <h2 class="card-title" style="font-size: 24px; margin-top: 70px; font-weight: bold;">@item.Title</h2>
+                                            <h6 class="card-subtitle mb-2" style="font-size: 17px; font-weight: bold;">By @item.Author</h6>
+                                            <p class="card-text" style="font-size: 14px;">@item.Date</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <div class="mt-2">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                @* <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div class="card text-center" style="width: 80%; border-radius: 10px; padding: 20px;">
+                        <div class="d-flex flex-column align-items-center">
+                            <img src="image/orange.png" alt="Orange Image" style="width: 90%; height: auto; border-radius: 10px;">
+                            <p class="card-text" style="font-family: 'Roboto', sans-serif; font-size: 18px; margin-top: 20px;">Welcome to our Blog! We're glad to have you here! Explore the latest insights, tips, and experiences from fellow interns!</p>
+                        </div>
+                    </div>
+                </div> *@
+            </div>
+        </div>
+
+        @* <div class="row" style="margin-top: 10px; margin-bottom: 50px;">
             <div class="col-md-12">
                 @foreach (var item in Model.Reverse())
                 {
@@ -65,14 +115,14 @@
                     }
                             </div> 
                          </div>  *@ 
-                    </a>
-                    @if (User.IsInRole("Admin"))
+                    @* </a> *@
+                    @* @if (User.IsInRole("Admin"))
                     {
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
                         <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
-                    }
-                }
-            </div>
+                    } *@
+                @* }
+            </div> *@
            @*  <div class="card-footer">
                 <div class="btn-group">
                     @* <button type="button" class="btn btn-sm btn-outline-success thumbs-up" style="padding: 10px 20px; font-size: 18px;">
@@ -88,7 +138,7 @@
                     @* <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger">Delete</a> *@
                 @* </div> *@
             @* </div> *@
-        </div>
+        @* </div> *@
 
     </tbody>
 </table>
