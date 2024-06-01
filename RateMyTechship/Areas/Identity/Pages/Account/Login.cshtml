@@ -74,51 +74,61 @@
                     //         </p>
                     //     </div>
                     // </form>
-                    <div class="container">
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <h3 style="text-align: center; font-weight: bold;">Sign in</h3>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <p style="margin: 0;">You will need to create an account. Please</p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button style="text-decoration: underline; color: orange; background: none; border: none; padding: 0; font-size: inherit; cursor: pointer; margin-left: 5px;" type="submit" class="btn btn-link" name="provider" value="@provider.Name" title="Sign in using your @provider.DisplayName account">
-                                        sign in.
-                                    </button>
-                                }
-                            </div>
-
-                            <div class="row text-center mt-4">
-                                <div class="col-md-4">
-                                    <img src="image/thumbs.png" alt="Thumbs Up" class="img-fluid" />
-                                    <p>Create an account to like or dislike</p>
+                    <div class="container mb-5">
+                        <div class="box-container" style="margin-bottom: 120px;">
+                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                <h3 class="text-center font-weight-bold">Sign in</h3>
+                                <div class="d-flex justify-content-center align-items-center flex-wrap">
+                                    <p class="mb-0 mr-2" style="text-align: center; font-size: 20px; margin-bottom: 5px;">Create an account to access additional features!</p>
+                                    
                                 </div>
-                                <div class="col-md-4">
-                                    <img src="image/question.png" alt="Question Mark" class="img-fluid" />
-                                    <p>Anonymous reviews</p>
+                                <div class="text-center mt-4">
+                                    @foreach (var provider in Model.ExternalLogins!)
+                                    {
+                                        <button type="submit" class="btn btn-primary font-weight-bold" style="font-size: 20px; border-radius: 10px; margin-top: 2px; margin-bottom: 5px; background-color: orange; border: none; outline: none;" name="provider" value="@provider.Name" title="Sign in using your @provider.DisplayName account">
+                                            <i class="fab fa-google mr-2"></i> Sign in with Google
+                                        </button>
+                                    }
                                 </div>
-                                <div class="col-md-4">
-                                    <img src="image/thumbs.png" class="img-fluid" alt="Image Description" />
-                                    <p>Edit your reviews</p>
+                                <div class="row text-center mt-4">
+                                    <div class="col-md-4">
+                                        <img src="~/image/thumbs.png" alt="Thumbs Up" class="img-fluid" />
+                                        <p class="font-weight-bold" style="font-size: 18px;">React to reviews!</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img src="~/image/pencil.png" alt="Pencil" class="img-fluid" />
+                                        <p class="font-weight-bold" style="font-size: 18px;">Edit your own reviews!</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img src="~/image/question.png" alt="Question Mark" class="img-fluid" />
+                                        <p class="font-weight-bold" style="font-size: 18px;">Stay anonymous!</p>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="text-center mt-4">
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button style="font-size: 20px; font-weight: bold; border-radius: 10px; margin-top: 15px; background-color: orange; border: none; outline: none;" type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Sign in using your @provider.DisplayName account">
-                                        <i class="fab fa-google" style="margin-right: 5px;"></i> Sign in with Google
-                                    </button>
-                                }
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
+
+
+
+
                 }
             }
         </section>
     </div>
 </div>
 
+<style>
+    .box-container {
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 800px;
+        background-color: white;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
 
+</style>
 
 @* </div> *@
 

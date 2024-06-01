@@ -26,6 +26,14 @@ namespace RateMyTechship.Controllers
             _userManager = userManager;
         }
 
+        public async Task<IActionResult> MyReviews()
+        {
+            // Retrieve reviews for the current user
+            var currentUser = await _userManager.GetUserAsync(User);
+            var userReviews = _context.Review.Where(r => r.AuthorId == currentUser.Id).ToList();
+            return View(userReviews);
+        }
+
         // GET: Reviews
         public async Task<IActionResult> Index()
         {
@@ -256,7 +264,8 @@ namespace RateMyTechship.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(MyReviews));
             }
             return View(review);
         }

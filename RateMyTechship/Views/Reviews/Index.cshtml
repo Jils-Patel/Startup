@@ -86,21 +86,6 @@
                             </div>
                         </div>
                     </div>
-                    @* <div class="card-footer">
-                        <div class="btn-group">
-                             <button type="button" class="btn btn-sm btn-outline-success thumbs-up" style="padding: 10px 20px; font-size: 18px;">
-                                &#x1F44D;
-                                <span class="badge bg-success">0</span>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-danger thumbs-down" style="padding: 10px 20px; font-size: 18px;">
-                                &#x1F44E;
-                                <span class="badge bg-danger">0</span>
-                            </button> 
-                            @* <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-primary">Edit</a> *@
-                            @*<a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-secondary" style="background-color: orange; color: black;">View Details</a> *@
-                            @* <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger">Delete</a> *@
-                        @* </div> *@
-                    @* </div> *@
                     <div class="card-footer d-flex justify-content-end align-items-center">
                         @if (User.IsInRole("Admin"))
                         {
@@ -113,11 +98,6 @@
                                 <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm custom-edit-button">Edit</a>
                             </div>
                         }
-
-                        @* @if (User.Identity.IsAuthenticated)
-                        {
-                            <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm custom-edit-button">Edit</a>
-                        } *@
                         <button class="btn btn-sm btn-outline-success" onclick="likeReview(@item.ID)" id="likeButton_@item.ID" style="outline: none; border: none; font-size: 20px;">
                             <i class="fas fa-thumbs-up" id="likeIcon_@item.ID" style="font-size: 20px; color: black; outline: black; border: black"></i>
                         </button>
@@ -127,16 +107,6 @@
                         </button>
                         <span id="dislikeCount_@item.ID" style="margin-left: 5px;">@item.Dislike</span>
                     </div>
-                    @* <div class="card-footer d-flex justify-content-end align-items-center">
-                        <button class="btn btn-sm btn-outline-success" onclick="likeReview(@item.ID)" style="outline: none; border: none; font-size: 20px;">
-                            <i class="fas fa-thumbs-up" style="outline: none; border: none; font-size: 20px; color: black; outline: black; border: black;"></i>
-                        </button>
-                        <span id="likeCount_@item.ID" style="margin-left: 5px; margin-right: 15px;">@item.Likes</span>
-                        <button class="btn btn-sm btn-outline-danger" onclick="dislikeReview(@item.ID)" style="outline: none; border: none; font-size: 20px;">
-                            <i class="fas fa-thumbs-down" style="outline: none; border: none; font-size: 20px; color: black; outline: black; border: black;"></i>
-                        </button>
-                        <span id="dislikeCount_@item.ID" style="margin-left: 5px;">@item.Dislike</span>
-                    </div> *@
                 </div>
             </div>
         </div>
@@ -222,105 +192,6 @@
         });
     }
 </script>
-
-@* <script>
-    var isAuthenticated = '@User.Identity.IsAuthenticated'.toLowerCase() === 'true';
-</script>
-
-
-<script>
-    function likeReview(reviewId) {
-        if (!isAuthenticated) {
-            window.location.href = '/Identity/Account/Login'; // Redirect to login page
-            return;
-        }
-
-        $.ajax({
-            type: "POST",
-            data: { reviewId: reviewId },
-            url: '/Reviews/Like',
-            success: function (response) {
-                $('#likeCount_' + reviewId).text(response.likesCount);
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
-            }
-        });
-    }
-
-    function dislikeReview(reviewId) {
-        if (!isAuthenticated) {
-            window.location.href = '/Identity/Account/Login'; // Redirect to login page
-            return;
-        }
-
-        $.ajax({
-            type: "POST",
-            data: { reviewId: reviewId },
-            url: '/Reviews/Dislike',
-            success: function (response) {
-                $('#dislikeCount_' + reviewId).text(response.dislikesCount);
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
-            }
-        });
-    }
-</script> *@
-
-
-@*  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const thumbsUpButtons = document.querySelectorAll('.thumbs-up');
-        const thumbsDownButtons = document.querySelectorAll('.thumbs-down');
-
-        thumbsUpButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                const countSpan = button.querySelector('.badge');
-                countSpan.textContent = parseInt(countSpan.textContent) + 1;
-            });
-        });
-
-        thumbsDownButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                const countSpan = button.querySelector('.badge');
-                countSpan.textContent = parseInt(countSpan.textContent) + 1;
-            });
-        });
-    })
-</script> *@
-
-@* @section scripts {
-    <script>
-        function likeReview(reviewId) {
-            $.ajax({
-                url: '/Review/Like',
-                type: 'POST',
-                data: { reviewId: reviewId },
-                success: function (response) {
-                    $('#likeCount_' + reviewId).text(response.likesCount);
-                },
-                error: function (xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        }
-
-        function dislikeReview(reviewId) {
-            $.ajax({
-                url: '/Review/Dislike',
-                type: 'POST',
-                data: { reviewId: reviewId },
-                success: function (response) {
-                    $('#dislikeCount_' + reviewId).text(response.dislikesCount);
-                },
-                error: function (xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        }
-    </script>
-} *@
 
 
 
