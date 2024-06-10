@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿@* <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RateMyTechship.styles.css" asp-append-version="true" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
-</head>
-<body>
+</head> *@
+@* <body> *@
     @* <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white" style="height: 75px;">
             <div class="container-fluid">
@@ -33,7 +33,7 @@
             </div>
         </nav>
     </header> *@
-    <header>
+    @* <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white" style="min-height: 75px;">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <div>
@@ -45,6 +45,8 @@
                     <a class="btn btn-outline-primary" asp-area="" asp-controller="Home" asp-action="Index" style="color: #777; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px; border: none;">Home</a>
                     <a class="btn btn-outline-primary" href="/Home#about-us" style="color: #777; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px; border: none;">About</a>
                     <a class="btn btn-outline-primary" href="/Home#contact" style="color: #777; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px; border: none;">Contact</a>
+                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Reviews" asp-action="Index" style="color: #777; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px; border: none;">Reviews</a>
+                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Internships" asp-action="Index" style="color: #777; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px; border: none;">Internships</a>
                     <a class="btn btn-outline-primary" asp-area="" asp-controller="Blogs" asp-action="Index" style="color: #777; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px; border: none;">Blog</a>
                 </div>
                 <div>
@@ -52,9 +54,9 @@
                 </div>
             </div>
         </nav>
-    </header>
+    </header> *@
 
-    <style>
+    @* <style>
         /* CSS for button hover effect */
         .btn-outline-primary:hover {
             color: orange !important;
@@ -79,4 +81,151 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+</html> *@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RateMyTechship</title>
+    <link rel="icon" type="image/x-icon" href="/image/Tech.ico" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/RateMyTechship.styles.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <style>
+        /* CSS for button hover effect */
+        .btn-outline-primary:hover {
+            color: orange !important;
+            background-color: transparent !important;
+        }
+
+        /* The sidebar menu */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: orange;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white; /* Ensure the text color is visible against the background */
+            border-radius: 7px;
+        }
+
+            /* Sidebar links */
+            .sidebar a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: white;
+                display: block;
+                transition: 0.3s;
+            }
+
+            /* Sidebar close button */
+            .sidebar .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+            /* Hover effect for sidebar links */
+            .sidebar a:hover {
+                color: white;
+                background-color: orange;
+                font-size: 35px; /* Increase font size on hover */
+                border-radius: 5px; /* Rounded corners */
+                transform: scale(1.1); /* Scale up the link */
+                transition: all 0.3s ease; /* Smooth transition */
+                text-decoration: none;
+            }
+
+
+        /* Adjust main content when sidebar is open */
+        body.active-sidebar {
+            overflow: hidden; /* Prevent scrolling of the main content when sidebar is open */
+        }
+
+        /* Ensure the button and logo are aligned properly */
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        #sidebarToggle {
+            margin-right: 10px; /* Adjust the spacing as needed */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white" style="min-height: 75px;">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <button id="sidebarToggle" class="btn btn-outline-primary" style="color: #777; font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 25px; border: none; margin-right: 10px;">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-weight: bold; font-family: Arial Bold, Arial, sans-serif; font-size: 30px;">
+                        <span style="color: black; font-weight: bold;">RateMy</span><span style="color: orange; font-weight: bold;">Techship</span>
+                    </a>
+                </div>
+                <div>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="sidebar" class="sidebar">
+        <a class="closebtn" href="javascript:void(0)" onclick="closeNav()">&times;</a>
+        <a href="/Home">Home</a>
+        <a href="/Home#about-us">About</a>
+        <a href="/Home#contact">Contact</a>
+        <a href="/Reviews">Reviews</a>
+        <a href="/Internships">Internships</a>
+        <a href="/Blogs">Blog</a>
+    </div>
+
+    <div class="container body-container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted text-center" style="background-color: orange; color: black;">
+        <div class="container" style="color: black">
+            &copy; 2024 - RateMyTechship - All Rights Reserved - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> - <a asp-area="" asp-controller="Home" asp-action="TermsOfUse">Terms of Use</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        document.getElementById("sidebarToggle").onclick = function () {
+            openNav();
+        };
+
+        function openNav() {
+            document.getElementById("sidebar").style.width = "250px";
+            document.body.classList.add("active-sidebar");
+        }
+
+        function closeNav() {
+            document.getElementById("sidebar").style.width = "0";
+            document.body.classList.remove("active-sidebar");
+        }
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
 </html>
+
+
+
+

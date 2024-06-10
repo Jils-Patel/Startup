@@ -13,8 +13,6 @@
 @using System.Security.Claims
 @inject IHttpContextAccessor HttpContextAccessor
 
-<h1>Search For Reviews Or Write Your Own!</h1>
-
 <div class="row">
     <div class="col-md-4">
         <form asp-action="ShowSearchResults">
@@ -23,9 +21,9 @@
                 <input name="SearchPhrase" class="form-control" placeholder="Enter search term here" />
             </div>
             <div class="form-group d-flex align-items-center justify-content-between">
-                <input type="submit" value="Search" class="btn btn-primary" />
+                <input type="submit" value="Search" class="btn btn-primary" style="font-weight: bold; color: black; background-color: orange; outline: none; border: none;"/>
                 <p style="margin: 0;">
-                    <a asp-action="Create" style="outline: black; text-decoration: none; color: black; background-color: orange; border-radius: 7px; font-size: 20px; padding: 6px 6px; margin-left: -100px;">Write a Review!</a>
+                    <a asp-action="Create" style="font-weight: bold; outline: black; text-decoration: none; color: black; background-color: lightblue; border-radius: 4px; font-size: 18px; padding: 6px 6px; margin-left: -100px;">Write a Review</a>
                 </p>
             </div>
         </form>
@@ -63,8 +61,8 @@
                                     <!-- Visible only on smaller screens -->
                                     <p class="card-text">Company: <strong>@Html.DisplayFor(modelItem => item.CompanyName)</strong></p>
                                     <p class="card-text">Period: <strong>@Html.DisplayFor(modelItem => item.Duration)</strong></p>
-                                    <p class="card-text">Work Culture: <strong>@Html.DisplayFor(modelItem => item.WorkCulture)</strong></p>
-                                    <p class="card-text">Work-Life Balance: <strong>@Html.DisplayFor(modelItem => item.Workload)</strong></p>
+                                    <p class="card-text">Work Environment: <strong>@Html.DisplayFor(modelItem => item.WorkCulture)</strong></p>
+                                    <p class="card-text">Mentorship: <strong>@Html.DisplayFor(modelItem => item.Workload)</strong></p>
                                     <p class="card-text">Learning Oppurtunities: <strong>@Html.DisplayFor(modelItem => item.LearningOpportunities)</strong></p>
                                     <p class="card-text">Networking Oppurtunities: <strong>@Html.DisplayFor(modelItem => item.NetworkingOpportunities)</strong></p>
                                 </div>
@@ -73,8 +71,8 @@
                                     <div>
                                         <p class="card-text" style="display: inline-block;">Company: <strong>@Html.DisplayFor(modelItem => item.CompanyName)</strong></p>
                                         <p class="card-text" style="display: inline-block; margin-left: 20px;">Period: <strong>@Html.DisplayFor(modelItem => item.Duration)</strong></p>
-                                        <p class="card-text" style="display: inline-block; margin-left: 20px;">Work Culture: <strong>@Html.DisplayFor(modelItem => item.WorkCulture)</strong></p>
-                                        <p class="card-text" style="display: inline-block; margin-left: 20px;">Work-Life Balance: <strong>@Html.DisplayFor(modelItem => item.Workload)</strong></p>
+                                        <p class="card-text" style="display: inline-block; margin-left: 20px;">Work Environment: <strong>@Html.DisplayFor(modelItem => item.WorkCulture)</strong></p>
+                                        <p class="card-text" style="display: inline-block; margin-left: 20px;">Mentorship: <strong>@Html.DisplayFor(modelItem => item.Workload)</strong></p>
                                     </div>
                                     <div>
                                         <p class="card-text" style="display: inline-block;">Learning Opportunities: <strong>@Html.DisplayFor(modelItem => item.LearningOpportunities)</strong></p>

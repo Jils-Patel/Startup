@@ -27,11 +27,11 @@
                 </div>
                 <div class="form-group" style="margin-top: 10px;">
                     <label asp-for="Rating" class="control-label" style="font-weight: bold;"></label>
-                    <input asp-for="Rating" class="form-control" placeholder="e.g. 5" max="5" />
+                    <input asp-for="Rating" class="form-control" placeholder="e.g. 5" max="5" min="1"/>
                     <span asp-validation-for="Rating" class="text-danger"></span>
                 </div>
                 <div class="form-group" style="margin-top: 10px;">
-                    <label asp-for="WorkCulture" class="control-label" style="font-weight: bold;"></label>
+                    <label asp-for="WorkCulture" class="control-label" style="font-weight: bold;">Work Environment</label>
                     <div>
                         <label class="radio-inline" style="margin-right: 25px;">
                             <input type="radio" asp-for="WorkCulture" value="Excellent" checked> Excellent
@@ -49,7 +49,7 @@
                     <span asp-validation-for="WorkCulture" class="text-danger"></span>
                 </div>
                 <div class="form-group" style="margin-top: 10px;">
-                    <label asp-for="Workload" class="control-label" style="font-weight: bold;"></label>
+                    <label asp-for="Workload" class="control-label" style="font-weight: bold;">Mentorship</label>
                     <div>
                         <label class="radio-inline" style="margin-right: 25px;">
                             <input type="radio" asp-for="Workload" value="Excellent" checked> Excellent

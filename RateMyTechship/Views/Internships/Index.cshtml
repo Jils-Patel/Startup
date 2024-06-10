@@ -1,0 +1,224 @@
+﻿@model IEnumerable<RateMyTechship.Models.Internships>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (User.IsInRole("Admin"))
+{
+    <p style="margin-top: 40px;">
+        <a asp-action="Create" style="padding: 10px 20px; margin-top: 40px; background-color: orange; color: black; font-size: 20px; font-family: 'Roboto', sans-serif; border-radius: 10px;">Create New</a>
+    </p>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ShowInternships">
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label for="SearchPhrase" class="control-label"></label>
+                <input name="SearchPhrase" class="form-control" placeholder="Enter any company, position, location, or term" />
+            </div>
+            <div class="form-group d-flex align-items-center justify-content-between">
+                <input type="submit" value="Search" class="btn btn-primary" style="color: black; font-weight: bold; background-color: orange; border: none; outline: none;" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .table-container {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-container th,
+        .table-container td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        .table-container th {
+            background: linear-gradient(to bottom, #ff6600, #ff9933);
+            color: white;
+        }
+
+        .table-container tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table-container tr:hover {
+            background-color: #ddd;
+        }
+
+    .action-icons a {
+        margin-right: 5px;
+        color: #007bff;
+    }
+</style>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info" role="alert" style="margin-top: 20px;">
+        No internships found.
+    </div>
+}
+else
+{
+    <div class="table-container" style="margin-bottom: 80px;">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Position</th>
+                        <th>Location</th>
+                        <th>Term</th>
+                        <th>Link</th>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <th>Actions</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.CompanyName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Role)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Location)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Term)</td>
+                            <td><a href="@item.ApplicationLink" class="btn btn-primary" target="_blank" style="width: 100%; background-color: orange; color: black; font-family: 'Roboto', sans-serif; border-radius: 10px; border: 2px solid black;">Apply</a></td>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <td class="action-icons">
+                                    <a asp-action="Edit" asp-route-id="@item.ID"><i class="fas fa-edit"></i></a>
+                                    <a asp-action="Details" asp-route-id="@item.ID"><i class="fas fa-info-circle"></i></a>
+                                    <a asp-action="Delete" asp-route-id="@item.ID"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+
+@* @model IEnumerable<RateMyTechship.Models.Internships>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (User.IsInRole("Admin"))
+{
+    <p style="margin-top: 40px;">
+        <a asp-action="Create" style="padding: 10px 20px; margin-top: 40px; background-color: orange; color: black; font-size: 20px; font-family: 'Roboto', sans-serif; border-radius: 10px;">Create New</a>
+    </p>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ShowInternships">
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label for="SearchPhrase" class="control-label"></label>
+                <input name="SearchPhrase" class="form-control" placeholder="Enter any company, position, location, or term" />
+            </div>
+            <div class="form-group d-flex align-items-center justify-content-between">
+                <input type="submit" value="Search" class="btn btn-primary" style="color: black; font-weight: bold; background-color: orange; border: none; outline: none;"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .table-container {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-container th,
+        .table-container td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        .table-container th {
+            background: linear-gradient(to bottom, #ff6600, #ff9933);
+            color: white;
+        }
+
+        .table-container tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table-container tr:hover {
+            background-color: #ddd;
+        }
+
+    .action-icons a {
+        margin-right: 5px;
+        color: #007bff;
+    }
+</style>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info" role="alert" style="margin-top: 20px;">
+        No internships found.
+    </div>
+}
+else
+{
+    <div class="table-container table-responsive" style="margin-bottom: 80px;">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Position</th>
+                    <th>Location</th>
+                    <th>Term</th>
+                    <th>Link</th>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <th>Actions</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.CompanyName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Role)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Location)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Term)</td>
+                        <td><a href="@item.ApplicationLink" class="btn btn-primary" target="_blank" style="width: 100%; background-color: orange; color: black; font-family: 'Roboto', sans-serif; border-radius: 10px; border: 2px solid black;">Apply</a></td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td class="action-icons">
+                                <a asp-action="Edit" asp-route-id="@item.ID"><i class="fas fa-edit"></i></a>
+                                <a asp-action="Details" asp-route-id="@item.ID"><i class="fas fa-info-circle"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.ID"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+} *@
+
+

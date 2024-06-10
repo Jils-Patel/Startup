@@ -209,7 +209,7 @@ namespace RateMyTechship.Controllers
                 return NotFound();
             }
 
-            if (review.AuthorId != _userManager.GetUserId(User))
+            if (!User.Identity.IsAuthenticated || (!User.IsInRole("Admin") && review.AuthorId != _userManager.GetUserId(User)))
             {
                 return Forbid(); // Or handle unauthorized access as needed
             }
@@ -222,7 +222,7 @@ namespace RateMyTechship.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,CreationDate,CompanyName,Duration,Position,Rating,InternshipReview,WorkCulture,LearningOpportunities,NetworkingOpportunities,Workload")] Review review)
         {
-            if (id != review.ID)
+            if (!User.Identity.IsAuthenticated || (!User.IsInRole("Admin") && id != review.ID))
             {
                 return NotFound();
             }
@@ -269,6 +269,7 @@ namespace RateMyTechship.Controllers
             }
             return View(review);
         }
+
 
 
         // POST: Reviews/Edit/5

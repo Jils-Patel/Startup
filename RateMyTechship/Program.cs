@@ -103,7 +103,7 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 // Call the seeding method to initialize the admin user
-SeedAdminUser(app.Services).Wait();
+//SeedAdminUser(app.Services).Wait();
 
 app.Run();
 

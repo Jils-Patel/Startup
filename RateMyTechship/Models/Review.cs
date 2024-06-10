@@ -16,13 +16,13 @@ namespace RateMyTechship.Models
         public string Position { get; set; }
         [DisplayName("Rating (1 - 5)")]
         public int Rating { get; set; }
-        [DisplayName("Work Culture")]
+        [DisplayName("Work Environment")]
         public string WorkCulture { get; set; }
         [DisplayName("Learning Oppurtunities")]
         public string LearningOpportunities { get; set; }
         [DisplayName("Networking Oppurtunities")]
         public string NetworkingOpportunities { get; set; }
-        [DisplayName("Work-Life Balance")]
+        [DisplayName("Mentorship")]
         public string Workload { get; set; }
         [DisplayName("Review")]
         public string InternshipReview { get; set; }

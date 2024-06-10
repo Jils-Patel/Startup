@@ -18,5 +18,6 @@ namespace RateMyTechship.Data
         {
             base.OnModelCreating(builder);
         }
+        public DbSet<RateMyTechship.Models.Internships> Internships { get; set; } = default!;
     }
 }
