@@ -13,5 +13,7 @@ namespace RateMyTechship.Models
         [DisplayName("Application Link")]
         public string ApplicationLink { get; set; }
         public string Term { get; set; }
+        [DisplayName("Application Deadline")]
+        public DateTime ApplicationDeadline { get; set; }
     }
 }

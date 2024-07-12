@@ -95,6 +95,7 @@
     <link rel="stylesheet" href="~/RateMyTechship.styles.css" asp-append-version="true" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
     <style>
+
         /* CSS for button hover effect */
         .btn-outline-primary:hover {
             color: orange !important;
@@ -158,9 +159,17 @@
             display: flex;
             align-items: center;
         }
-
         #sidebarToggle {
             margin-right: 10px; /* Adjust the spacing as needed */
+        }
+
+        .footer-content {
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -200,8 +209,19 @@
     </div>
 
     <footer class="border-top footer text-muted text-center" style="background-color: orange; color: black;">
-        <div class="container" style="color: black">
-            &copy; 2024 - RateMyTechship - All Rights Reserved - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> - <a asp-area="" asp-controller="Home" asp-action="TermsOfUse">Terms of Use</a>
+        <div class="footer-content">
+        <div class="social-icons" style="margin-bottom: -25px; display: flex; align-items: center; justify-content: center;">
+            <span style="font-family: 'Roboto', sans-serif; font-size: 1.5em; color: black; font-weight: bold; margin-right: 10px;">Follow Us</span>
+                <a href="https://www.instagram.com/ratemytechship/" target="_blank" style="color: black; font-size: 2em; margin-right: 10px;">
+                <i class="fab fa-instagram"></i>
+            </a>
+                <a href="https://www.tiktok.com/@@ratemytechship?lang=en" target="_blank" style="color: black; font-size: 2em; margin-right: 10px;">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>
+        <div class="container" style="color: black; font-size: 13px;">
+            &copy; 2024 - RateMyTechship - All Rights Reserved - <a asp-area="" asp-controller="Home" asp-action="Privacy" style="color: black;">Privacy</a> - <a asp-area="" asp-controller="Home" asp-action="TermsOfUse" style="color: black;">Terms of Use</a>
+        </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

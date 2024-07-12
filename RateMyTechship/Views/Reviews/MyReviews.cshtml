@@ -26,7 +26,7 @@
 
 
 
-<div class="container" style="margin-top: 30px; color: black; margin-bottom: 80px;">
+<div class="container" style="margin-top: 30px; color: black; margin-bottom: 120px;">
     @foreach (var item in Model)
     {
         @if (User.IsInRole("Admin") || (User.Identity.IsAuthenticated && item.AuthorId == User.FindFirstValue(ClaimTypes.NameIdentifier)))

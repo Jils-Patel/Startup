@@ -11,11 +11,11 @@
 }
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="ShowInternships">
             <div class="form-group" style="margin-bottom: 20px;">
                 <label for="SearchPhrase" class="control-label"></label>
-                <input name="SearchPhrase" class="form-control" placeholder="Enter any company, position, location, or term" />
+                <input name="SearchPhrase" class="form-control" placeholder="Search for any company, position, location, or term"/>
             </div>
             <div class="form-group d-flex align-items-center justify-content-between">
                 <input type="submit" value="Search" class="btn btn-primary" style="color: black; font-weight: bold; background-color: orange; border: none; outline: none;" />
@@ -23,6 +23,61 @@
         </form>
     </div>
 </div>
+
+@* <div class="row mb-4" style="margin-top: 20px;">
+    <div class="col-md-12">
+        <form asp-action="Index">
+            <div class="form-group">
+                <input name="SearchPhrase" class="form-control" placeholder="Search" style="max-width: 850px;"/>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-2">
+                    <label for="CompanyName">Company</label>
+                    <select name="CompanyName" class="form-control">
+                        <option value="">All</option>
+                        @foreach (var company in Model.Select(i => i.CompanyName).Distinct().OrderBy(c => c))
+                        {
+                            <option value="@company">@company</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="Role">Position</label>
+                    <select name="Role" class="form-control">
+                        <option value="">All</option>
+                        @foreach (var role in Model.Select(i => i.Role).Distinct().OrderBy(r => r))
+                        {
+                            <option value="@role">@role</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="Location">Location</label>
+                    <select name="Location" class="form-control">
+                        <option value="">All</option>
+                        @foreach (var location in Model.Select(i => i.Location).Distinct().OrderBy(l => l))
+                        {
+                            <option value="@location">@location</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="Term">Term</label>
+                    <select name="Term" class="form-control">
+                        <option value="">All</option>
+                        @foreach (var term in Model.Select(i => i.Term).Distinct().OrderBy(t => t))
+                        {
+                            <option value="@term">@term</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2 align-self-end">
+                    <input type="submit" value="Filter" class="btn btn-primary mt-3" style="font-size: 17px; background-color: orange; color: white; font-family: 'Roboto', sans-serif; border-radius: 10px; border: 2px solid white;" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div> *@
 
 <style>
     .table-container {
@@ -69,7 +124,7 @@
 }
 else
 {
-    <div class="table-container" style="margin-bottom: 80px;">
+    <div class="table-container" style="margin-bottom: 120px;">
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -93,7 +148,17 @@ else
                             <td>@Html.DisplayFor(modelItem => item.Role)</td>
                             <td>@Html.DisplayFor(modelItem => item.Location)</td>
                             <td>@Html.DisplayFor(modelItem => item.Term)</td>
-                            <td><a href="@item.ApplicationLink" class="btn btn-primary" target="_blank" style="width: 100%; background-color: orange; color: black; font-family: 'Roboto', sans-serif; border-radius: 10px; border: 2px solid black;">Apply</a></td>
+                            <td>
+                                @if (item.ApplicationDeadline < DateTime.Now)
+                                {
+                                    <i class="fas fa-lock" style="color: black; font-size: 24px;"></i>
+                                }
+                                else
+                                {
+                                    <a href="@item.ApplicationLink" class="btn btn-primary" target="_blank" style="width: 100%; background-color: orange; color: black; font-family: 'Roboto', sans-serif; border-radius: 10px; border: 2px solid black;">Apply</a>
+                                }
+                            </td>
+                            @* <td><a href="@item.ApplicationLink" class="btn btn-primary" target="_blank" style="width: 100%; background-color: orange; color: black; font-family: 'Roboto', sans-serif; border-radius: 10px; border: 2px solid black;">Apply</a></td> *@
                             @if (User.IsInRole("Admin"))
                             {
                                 <td class="action-icons">
