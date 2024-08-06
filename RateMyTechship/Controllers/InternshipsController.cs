@@ -20,43 +20,6 @@ namespace RateMyTechship.Controllers
             _context = context;
         }
 
-        //public async Task<IActionResult> Index(string searchPhrase, string companyName, string role, string location, string term, DateTime? applicationDeadline)
-        //{
-        //    var internships = from i in _context.Internships
-        //                      select i;
-
-        //    if (!String.IsNullOrEmpty(searchPhrase))
-        //    {
-        //        internships = internships.Where(i => i.CompanyName.Contains(searchPhrase) ||
-        //                                             i.Role.Contains(searchPhrase) ||
-        //                                             i.Location.Contains(searchPhrase) ||
-        //                                             i.Term.Contains(searchPhrase));
-        //    }
-
-        //    if (!String.IsNullOrEmpty(companyName))
-        //    {
-        //        internships = internships.Where(i => i.CompanyName == companyName).OrderBy(i => i.CompanyName);
-        //    }
-
-        //    if (!String.IsNullOrEmpty(role))
-        //    {
-        //        internships = internships.Where(i => i.Role == role).OrderBy(i => i.Role);
-        //    }
-
-        //    if (!String.IsNullOrEmpty(location))
-        //    {
-        //        internships = internships.Where(i => i.Location == location).OrderBy(i => i.Location);
-        //    }
-
-        //    if (!String.IsNullOrEmpty(term))
-        //    {
-        //        internships = internships.Where(i => i.Term == term).OrderBy(i => i.Term);
-        //    }
-
-        //    return View(await internships.OrderBy(i => i.CompanyName).ToListAsync());
-        //}
-
-
         // GET: Internships
         public async Task<IActionResult> Index()
         {
